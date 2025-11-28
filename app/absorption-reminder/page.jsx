@@ -22,40 +22,64 @@ export default function AbsorptionReminder() {
 
     const questions = [
         {
-            id: 'wakeTime',
-            question: 'What time do you usually wake up?',
+            id: 'medicineFrequency',
+            question: 'What medicine are you going to take and how many times a day has it been prescribed?',
             type: 'text',
-            placeholder: 'e.g., 7 AM, सुबह 7 बजे, 7:00, morning 7'
+            placeholder: 'e.g., Paracetamol 500 mg, three times a day'
         },
         {
-            id: 'breakfast',
-            question: 'What time do you have breakfast?',
+            id: 'todayDose',
+            question: 'Have you already taken any dose today? If yes, what time? If no, we\'ll start fresh.',
             type: 'text',
-            placeholder: 'e.g., 8 AM, नाश्ता 8 बजे, 8:00, morning 8'
+            placeholder: 'e.g., No, not yet or Yes, at 9 AM'
         },
         {
-            id: 'lunch',
-            question: 'What time do you have lunch?',
+            id: 'mealTimes',
+            question: 'What time do you usually eat breakfast, lunch, and dinner?',
             type: 'text',
-            placeholder: 'e.g., 1 PM, दोपहर 1 बजे, 13:00, afternoon 1'
+            placeholder: 'e.g., Breakfast at 9 am, lunch at 2 pm, dinner at 9 pm'
         },
         {
-            id: 'dinner',
-            question: 'What time do you have dinner?',
+            id: 'foodTiming',
+            question: 'Do you know if this medicine should be taken before food, with food, or after food?',
             type: 'text',
-            placeholder: 'e.g., 8 PM, रात 8 बजे, 20:00, evening 8'
+            placeholder: 'e.g., After food or I don\'t know'
         },
         {
-            id: 'sleep',
-            question: 'What time do you go to sleep?',
+            id: 'beverages',
+            question: 'Do you drink tea, coffee, milk, or juice around meal or medicine time? If yes, when?',
             type: 'text',
-            placeholder: 'e.g., 10 PM, रात 10 बजे, 22:00, night 10'
+            placeholder: 'e.g., Tea at 8:30 am and 5 pm'
         },
         {
-            id: 'frequency',
-            question: 'How many times per day should you take this medicine?',
+            id: 'otherMedicines',
+            question: 'Are you taking any other medicines, vitamins, or supplements during the day?',
             type: 'text',
-            placeholder: 'e.g., once daily, दिन में एक बार, twice, 2 times'
+            placeholder: 'e.g., No or Vitamin D in morning'
+        },
+        {
+            id: 'stomachIssues',
+            question: 'Do you have acidity, gas, indigestion, or stomach-related issues?',
+            type: 'text',
+            placeholder: 'e.g., Sometimes mild acidity after lunch'
+        },
+        {
+            id: 'waterIntake',
+            question: 'How much water do you drink in a typical day?',
+            type: 'text',
+            placeholder: 'e.g., Around 1.5 liters or 6-8 glasses'
+        },
+        {
+            id: 'physicalActivity',
+            question: 'Do you do any regular physical activity like gym, running, or heavy work? If yes, at what time?',
+            type: 'text',
+            placeholder: 'e.g., Gym from 7 pm to 8 pm or No'
+        },
+        {
+            id: 'sleepPattern',
+            question: 'Do you sleep or lie down soon after meals or medicines?',
+            type: 'text',
+            placeholder: 'e.g., I usually lie down 20 minutes after dinner'
         }
     ];
 
@@ -67,6 +91,7 @@ export default function AbsorptionReminder() {
         const medicineName = params.get('medicine');
         if (medicineName) {
             setMedicine(medicineName);
+            setShowQuestionnaire(true);
         }
     }, []);
 
@@ -102,31 +127,68 @@ export default function AbsorptionReminder() {
                     model: 'llama-3.3-70b-versatile',
                     messages: [{
                         role: 'user',
-                        content: `You are a multilingual medical AI. The user has provided their daily routine in their native language. Parse and understand the times, then create a personalized medicine schedule for ${medicine}.
+                        content: `You are an expert medical AI creating absorption-focused medicine schedules.
 
-User's Daily Routine (may be in Hindi, English, or any language):
-- Wake up: ${userAnswers.wakeTime}
-- Breakfast: ${userAnswers.breakfast}
-- Lunch: ${userAnswers.lunch}
-- Dinner: ${userAnswers.dinner}
-- Sleep: ${userAnswers.sleep}
-- Frequency: ${userAnswers.frequency}
+Medicine: ${medicine}
 
-First, understand and convert all times to 24-hour format. Then provide response in this EXACT format (no asterisks, no markdown):
+Patient Information:
+1. Medicine & Frequency: ${userAnswers.medicineFrequency}
+2. Today's Dose: ${userAnswers.todayDose}
+3. Meal Times: ${userAnswers.mealTimes}
+4. Food Timing: ${userAnswers.foodTiming}
+5. Beverages: ${userAnswers.beverages}
+6. Other Medicines: ${userAnswers.otherMedicines}
+7. Stomach Issues: ${userAnswers.stomachIssues}
+8. Water Intake: ${userAnswers.waterIntake}
+9. Physical Activity: ${userAnswers.physicalActivity}
+10. Sleep Pattern: ${userAnswers.sleepPattern}
 
-SCHEDULE:
-Time 1: [HH:MM format] - [with meal/empty stomach]
-Time 2: [HH:MM format] - [with meal/empty stomach]
-Time 3: [HH:MM format] - [with meal/empty stomach]
+Provide response in this EXACT format (no asterisks, no markdown):
 
-BEST TIME: [explanation based on medicine absorption]
-TAKE WITH: [milk/water/juice/food - specific for this medicine]
-WHY: [absorption science for this specific medicine]
-AVOID: [what not to take with - specific interactions]
-PRO TIP: [personalized advice based on their exact routine]`
+Ideal Absorption-Focused Timing Plan
+
+I will optimize timing based on:
+• empty stomach vs full
+• avoiding tea/coffee
+• avoiding gym/exercise time
+• digestion time
+• acidity management
+• hydration
+
+Dose 1 — [time]
+
+Reason:
+• [meal timing detail]
+• [beverage avoidance]
+• [absorption benefit]
+• [effect timing]
+
+Dose 2 — [time]
+
+Reason:
+• [gap from previous dose]
+• [meal timing detail]
+• [beverage avoidance]
+• [absorption window]
+
+Dose 3 (Only if needed) — [time]
+
+Reason:
+• [gap maintenance]
+• [exercise consideration]
+• [meal digestion time]
+• [sleep timing]
+
+Extra absorption boosters:
+
+1. [Water intake advice]
+2. [Beverage timing advice]
+3. [Exercise timing advice]
+4. [Posture advice]
+5. [Meal advice]`
                     }],
                     temperature: 0.3,
-                    max_tokens: 500
+                    max_tokens: 800
                 })
             });
 
@@ -183,42 +245,43 @@ PRO TIP: [personalized advice based on their exact routine]`
         <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
             <div className="bg-white border-b border-teal-100 shadow-sm">
                 <div className="max-w-4xl mx-auto px-4 py-6">
-                    <Link href="/" className="inline-flex items-center text-slate-600 hover:text-teal-600 transition mb-4">
+                    <button onClick={() => window.history.back()} className="inline-flex items-center text-slate-600 hover:text-teal-600 transition mb-4">
                         <ArrowLeft className="w-5 h-5 mr-2" />
                         Back
-                    </Link>
+                    </button>
                     <h1 className="text-3xl font-bold text-slate-900">AI Medicine Schedule Optimizer</h1>
                     <p className="text-slate-600 mt-2">Answer in any language → AI creates your personalized schedule</p>
                 </div>
             </div>
 
             <div className="max-w-4xl mx-auto px-4 py-12">
-                {/* Medicine Input */}
-                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-teal-100">
-                    <h2 className="text-xl font-bold mb-6 text-slate-900">Step 1: Enter Medicine Name</h2>
-                    
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-semibold mb-2 text-slate-700">Medicine Name</label>
-                            <input
-                                type="text"
-                                value={medicine}
-                                onChange={(e) => setMedicine(e.target.value)}
-                                placeholder="e.g., Vitamin D3, Metformin"
-                                className="w-full px-4 py-3 border-2 border-teal-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
-                            />
-                        </div>
+                {!medicine && (
+                    <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-teal-100">
+                        <h2 className="text-xl font-bold mb-6 text-slate-900">Step 1: Enter Medicine Name</h2>
+                        
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-semibold mb-2 text-slate-700">Medicine Name</label>
+                                <input
+                                    type="text"
+                                    value={medicine}
+                                    onChange={(e) => setMedicine(e.target.value)}
+                                    placeholder="e.g., Vitamin D3, Metformin"
+                                    className="w-full px-4 py-3 border-2 border-teal-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+                                />
+                            </div>
 
-                        <button
-                            onClick={startQuestionnaire}
-                            disabled={!medicine}
-                            className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
-                        >
-                            <Sparkles className="w-5 h-5" />
-                            Start AI Schedule Builder
-                        </button>
+                            <button
+                                onClick={startQuestionnaire}
+                                disabled={!medicine}
+                                className="w-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
+                            >
+                                <Sparkles className="w-5 h-5" />
+                                Start AI Schedule Builder
+                            </button>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* AI Questionnaire */}
                 {showQuestionnaire && (
@@ -248,16 +311,11 @@ PRO TIP: [personalized advice based on their exact routine]`
 
                                     {questions[currentQuestion].type === 'text' && (
                                         <div>
-                                            <input
-                                                type="text"
+                                            <textarea
                                                 placeholder={questions[currentQuestion].placeholder}
+                                                value={answers[questions[currentQuestion].id] || ''}
                                                 onChange={(e) => setAnswers({...answers, [questions[currentQuestion].id]: e.target.value})}
-                                                onKeyPress={(e) => {
-                                                    if (e.key === 'Enter' && e.target.value.trim()) {
-                                                        handleAnswer(e.target.value);
-                                                    }
-                                                }}
-                                                className="w-full px-4 py-3 border-2 border-teal-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none text-lg"
+                                                className="w-full px-4 py-3 border-2 border-teal-200 rounded-xl focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none text-lg min-h-[100px] resize-none"
                                                 autoFocus
                                             />
                                             <button
@@ -268,7 +326,7 @@ PRO TIP: [personalized advice based on their exact routine]`
                                                 disabled={!answers[questions[currentQuestion].id]?.trim()}
                                                 className="mt-3 w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition"
                                             >
-                                                Next
+                                                {currentQuestion === questions.length - 1 ? 'Generate Schedule' : 'Next Question'}
                                             </button>
                                             <p className="text-xs text-slate-500 mt-2 text-center">Write in any language - AI will understand</p>
                                         </div>
@@ -292,95 +350,16 @@ PRO TIP: [personalized advice based on their exact routine]`
                 {/* AI Generated Schedule */}
                 {fullSchedule && !generatingSchedule && (
                     <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-teal-100">
-                        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-900">
+                        <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-900 mb-6">
                             <Sparkles className="w-7 h-7 text-teal-600" />
-                            Your Personalized Medicine Schedule
+                            Your Medicine Schedule
                         </h2>
                         
-                        <div className="space-y-4 mb-6">
-                            {(() => {
-                                const scheduleLines = fullSchedule.match(/Time \d+: .+/g) || [];
-                                return scheduleLines.map((line, idx) => (
-                                    <div key={idx} className="bg-gradient-to-r from-teal-50 to-cyan-50 border-2 border-teal-200 rounded-xl p-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
-                                                <Clock className="w-5 h-5 text-white" />
-                                            </div>
-                                            <p className="text-slate-800 font-semibold">{line.replace(/Time \d+: /, '')}</p>
-                                        </div>
-                                    </div>
-                                ));
-                            })()}
+                        <div className="bg-gradient-to-r from-teal-50 to-cyan-50 border-2 border-teal-200 rounded-xl p-6 mb-6">
+                            <pre className="text-sm text-slate-800 whitespace-pre-wrap font-sans leading-relaxed">{fullSchedule}</pre>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-4 mb-6">
-                            {(() => {
-                                const bestTime = fullSchedule.match(/BEST TIME: (.+)/)?.[1]?.trim();
-                                const takeWith = fullSchedule.match(/TAKE WITH: (.+)/)?.[1]?.trim();
-                                const why = fullSchedule.match(/WHY: (.+)/)?.[1]?.trim();
-                                const avoid = fullSchedule.match(/AVOID: (.+)/)?.[1]?.trim();
-                                const tip = fullSchedule.match(/PRO TIP: (.+)/)?.[1]?.trim();
-                                
-                                return (
-                                    <>
-                                        {bestTime && (
-                                            <div className="bg-teal-50 border-2 border-teal-200 rounded-xl p-5">
-                                                <h3 className="font-bold text-teal-900 mb-2 flex items-center gap-2">
-                                                    <Clock className="w-5 h-5" />
-                                                    Best Time
-                                                </h3>
-                                                <p className="text-slate-700">{bestTime}</p>
-                                            </div>
-                                        )}
-                                        
-                                        {takeWith && (
-                                            <div className="bg-cyan-50 border-2 border-cyan-200 rounded-xl p-5">
-                                                <h3 className="font-bold text-cyan-900 mb-2 flex items-center gap-2">
-                                                    <Droplet className="w-5 h-5" />
-                                                    Take With
-                                                </h3>
-                                                <p className="text-slate-700">{takeWith}</p>
-                                            </div>
-                                        )}
-                                        
-                                        {why && (
-                                            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
-                                                <h3 className="font-bold text-blue-900 mb-2 flex items-center gap-2">
-                                                    <span className="text-lg">💡</span>
-                                                    Why This Works
-                                                </h3>
-                                                <p className="text-slate-700">{why}</p>
-                                            </div>
-                                        )}
-                                        
-                                        {avoid && (
-                                            <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-5">
-                                                <h3 className="font-bold text-orange-900 mb-2 flex items-center gap-2">
-                                                    <span className="text-lg">⚠️</span>
-                                                    Avoid
-                                                </h3>
-                                                <p className="text-slate-700">{avoid}</p>
-                                            </div>
-                                        )}
-                                    </>
-                                );
-                            })()}
-                        </div>
-                        
-                        {(() => {
-                            const tip = fullSchedule.match(/PRO TIP: (.+)/)?.[1]?.trim();
-                            return tip && (
-                                <div className="bg-gradient-to-r from-teal-100 to-cyan-100 border-2 border-teal-300 rounded-xl p-5 mb-6">
-                                    <div className="flex items-start gap-3">
-                                        <span className="text-2xl">💡</span>
-                                        <div>
-                                            <h3 className="font-bold text-teal-900 mb-2">Pro Tip</h3>
-                                            <p className="text-slate-700 text-lg">{tip}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })()}
+
 
                         <h3 className="text-lg font-bold mb-4 text-slate-900">Step 2: Set Reminder</h3>
                         
@@ -454,8 +433,8 @@ PRO TIP: [personalized advice based on their exact routine]`
                                         </div>
                                         <p className="text-sm text-slate-600 mb-2">📱 {r.phone}</p>
                                         {r.schedule && (
-                                            <div className="text-xs text-teal-700 bg-teal-100 px-3 py-2 rounded-lg mt-2">
-                                                {r.schedule.match(/Time \d+: .+/g)?.[0] || 'View full schedule'}
+                                            <div className="text-xs text-teal-700 bg-teal-100 px-3 py-2 rounded-lg mt-2 line-clamp-2">
+                                                {r.schedule.substring(0, 100)}...
                                             </div>
                                         )}
                                     </div>

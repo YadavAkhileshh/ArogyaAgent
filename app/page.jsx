@@ -59,8 +59,7 @@ export default function Home() {
                                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                             </Link>
                             <Link href="/absorption-reminder" className="group bg-white hover:bg-blue-50 text-blue-600 px-10 py-5 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 border-2 border-blue-600 shadow-xl hover:shadow-2xl hover:scale-105">
-                                <Bell className="w-6 h-6" />
-                                Create AI Schedule
+                                Improve Absorption
                             </Link>
                         </div>
                         

@@ -39,19 +39,23 @@ AI explains uses, dosage, side effects
 
 ### 💧 Agent 2: AI Schedule Builder
 **What it does:**
-- Answer questions in ANY language (Hindi, English, etc.)
-- AI creates personalized full-day schedule
-- Tells best time, what to take with, what to avoid
+- 10 detailed questions about your routine
+- Answer in ANY language (Hindi, English, etc.)
+- AI creates absorption-focused timing plan
+- Considers meals, beverages, exercise, sleep
 - Generates SMS reminder message
 
 **Example:**
 ```
-Q: When do you wake up?
-A: सुबह 7 बजे (or "7 AM" or "morning 7")
+Q: What time do you eat breakfast, lunch, dinner?
+A: Breakfast at 9 am, lunch at 2 pm, dinner at 9 pm
 ↓
-AI understands and creates schedule
+Q: Do you drink tea/coffee? When?
+A: Tea at 8:30 am and 5 pm
 ↓
-Shows: Take at 8:00 AM with milk after breakfast
+AI creates optimal schedule avoiding conflicts
+↓
+Shows: Dose 1 at 9:30 AM (after breakfast, avoids tea)
 ```
 
 ---
@@ -89,11 +93,15 @@ Shows: Take at 8:00 AM with milk after breakfast
 - Write in Hindi, English, or any language
 - AI understands: "सुबह 7 बजे", "7 AM", "morning 7"
 - Natural language input
+- 10 comprehensive questions about your routine
 
-### 3. Personalized AI Schedule
-- Based on YOUR daily routine
-- Full-day medicine schedule
-- Absorption optimization tips
+### 3. Absorption-Focused Scheduling
+- Based on YOUR complete routine
+- Considers meal times, beverages, exercise
+- Avoids tea/coffee conflicts
+- Optimizes for stomach issues
+- Timing around physical activity
+- Sleep pattern consideration
 
 ### 4. Beautiful UI
 - Card-based design
@@ -122,16 +130,20 @@ Shows: Take at 8:00 AM with milk after breakfast
 
 ### Create AI Schedule:
 
-1. Click "Create AI Schedule"
-2. Enter medicine name
-3. Answer 6 questions in ANY language:
-   - Wake up time: "सुबह 7 बजे" or "7 AM"
-   - Breakfast time: "8 बजे" or "8:00"
-   - Lunch time: "दोपहर 1 बजे" or "1 PM"
-   - Dinner time: "रात 8 बजे" or "8 PM"
-   - Sleep time: "रात 10 बजे" or "10 PM"
-   - Frequency: "दिन में एक बार" or "once daily"
-4. AI creates personalized schedule
+1. Click "Optimize Absorption with AI" from generic finder
+2. Medicine name auto-filled
+3. Answer 10 detailed questions in ANY language:
+   - Medicine frequency
+   - Today's dose status
+   - Meal times
+   - Food timing preference
+   - Beverage habits (tea/coffee/milk)
+   - Other medicines
+   - Stomach issues
+   - Water intake
+   - Physical activity
+   - Sleep pattern
+4. AI creates absorption-focused timing plan
 5. Enter phone number
 6. Copy SMS message and send manually
 
@@ -148,10 +160,11 @@ Shows: Take at 8:00 AM with milk after breakfast
 - Where to buy (maps integration)
 
 ### AI Schedule Page:
-- Multilingual questionnaire
+- 10-question comprehensive assessment
+- Multilingual support
 - Progress bar
-- AI schedule generation
-- Absorption optimization cards
+- Absorption-focused timing plan
+- Considers beverages, meals, exercise
 - SMS message generator
 - Saved schedules list
 
@@ -192,9 +205,9 @@ Shows: Take at 8:00 AM with milk after breakfast
 
 ### Test AI Schedule:
 ```
-1. Enter "Vitamin D3"
-2. Answer in Hindi: "सुबह 7 बजे"
-3. AI creates schedule
+1. Click "Optimize Absorption" from generic finder
+2. Answer 10 questions (any language)
+3. AI creates absorption-focused plan
 4. Copy SMS message
 ```
 ---

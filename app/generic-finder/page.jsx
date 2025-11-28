@@ -275,15 +275,14 @@ Medicine name:`
                     model: 'llama-3.3-70b-versatile',
                     messages: [{
                         role: 'user',
-                        content: `Medicine: ${medicineName}\n\nProvide information in plain text (NO asterisks, NO markdown, NO bold):\n\nUSE: [what it treats]\nDOSAGE: [typical dose]\nSIDE EFFECTS: [common ones]\nPRECAUTIONS: [warnings]\n\nExample format:\nUSE: Pain relief and fever reduction\nDOSAGE: 500mg every 6 hours, maximum 4 times daily\nSIDE EFFECTS: Nausea, stomach upset, allergic reactions\nPRECAUTIONS: Do not exceed recommended dose, avoid alcohol`
+                        content: `Medicine: ${medicineName}\n\nProvide information in this user-friendly format (NO asterisks, NO markdown):\n\nUse\n\n[What it treats - simple bullet points]\n\nDosage\n\n[Common strengths and how to take]\n[Frequency guidelines]\n[Maximum daily limit]\n\nPossible Side Effects\n\nSome people may experience:\n[List common side effects]\nThese usually pass on their own.\n\nImportant Precautions\n\n[When not to take]\n[Who should avoid]\n[Important warnings]`
                     }],
                     temperature: 0.3,
-                    max_tokens: 200
+                    max_tokens: 300
                 })
             });
             const data = await response.json();
             let description = data.choices[0].message.content;
-            // Remove all markdown formatting
             description = description.replace(/\*\*/g, '').replace(/\*/g, '').replace(/#/g, '');
             setAiDescription(description);
         } catch (error) {
@@ -623,7 +622,7 @@ Medicine name:`
                                         <div className="flex items-start gap-3">
                                             <Pill className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                                             <div className="flex-1">
-                                                <h4 className="font-bold text-blue-900 mb-3">AI Medicine Information</h4>
+                                                <h4 className="font-bold text-blue-900 mb-3">Medicine Information</h4>
                                                 <pre className="text-sm text-slate-700 whitespace-pre-wrap font-sans">{aiDescription}</pre>
                                             </div>
                                         </div>
