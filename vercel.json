@@ -1,8 +1,4 @@
 {
-  "buildCommand": "next build --webpack",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
-  "framework": "nextjs",
   "functions": {
     "app/api/send-sms/route.js": {
       "maxDuration": 10

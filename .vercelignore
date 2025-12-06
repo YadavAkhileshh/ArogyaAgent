@@ -4,4 +4,6 @@ public/List of New Drugs approved in the year 2025 till datee.pdf
 public/JanAusadh Sortingview.csv
 .next/cache
 .next/trace
+.next/server/chunks
 node_modules
+*.log
