@@ -7,6 +7,7 @@ import { medicineDatabase, searchMedicine } from '@/lib/medicine-database';
 
 
 export default function GenericFinder() {
+    // Generic medicine finder component
     const [searchTerm, setSearchTerm] = useState('');
     const [result, setResult] = useState(null);
     const [searching, setSearching] = useState(false);

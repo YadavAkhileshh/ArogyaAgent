@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+// Secure SMS API route
 export async function POST(request) {
     try {
         const { to, message } = await request.json();

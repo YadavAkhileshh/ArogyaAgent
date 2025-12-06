@@ -247,6 +247,31 @@ medimatrix/
 
 ---
 
+## 🤝 Contributing
+
+**Contributions Welcome!** Help us improve healthcare access in India.
+
+### How to Contribute:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Areas for Contribution:
+- 🏥 **Healthcare Data** - Add more government medicine sources
+- 🤖 **AI Models** - Improve OCR accuracy and multilingual support
+- 🎨 **UI/UX** - Enhance user experience and accessibility
+- 📱 **Mobile** - React Native app development
+- 🔒 **Security** - Security audits and improvements
+- 📊 **Analytics** - Usage tracking and insights
+- 🌍 **Localization** - Support for more Indian languages
+
+### Contributors
+Thanks to all contributors who help make healthcare more accessible!
+
+---
+
 ## 📄 License
 
 MIT License - Free to use and modify
@@ -256,3 +281,4 @@ MIT License - Free to use and modify
 **Built with ❤️ for better healthcare access in India**
 
 **Status:** ✅ Production Ready | 🔒 Secure | 🌍 Multilingual
+

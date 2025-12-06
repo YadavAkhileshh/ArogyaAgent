@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, Droplet, Bell, Trash2, Clock, Copy, Check, MessageSquare, Sparkles } from 'lucide-react';
 
 export default function AbsorptionReminder() {
+    // AI schedule builder component
     const [medicine, setMedicine] = useState('');
     const [phone, setPhone] = useState('');
     const [absorptionAdvice, setAbsorptionAdvice] = useState(null);
