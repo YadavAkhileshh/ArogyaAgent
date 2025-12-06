@@ -1,0 +1,14 @@
+{
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "functions": {
+    "app/api/send-sms/route.js": {
+      "maxDuration": 10
+    },
+    "app/api/send-whatsapp/route.js": {
+      "maxDuration": 10
+    }
+  }
+}
